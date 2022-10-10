@@ -4,6 +4,8 @@ const input = document.querySelector('input');
 const textarea = document.querySelector('textarea');
 const form = document.querySelector('.feedback-form');
 
+form.addEventListener('input', throttle(inputData, 500));
+
 function inputData() {
   const data = {
     email: input.value,
@@ -14,12 +16,18 @@ function inputData() {
 
 if (localStorage.length !== 0) {
   input.value = JSON.parse(localStorage.getItem('feedback-form-state')).email;
-  textarea.value = JSON.parse(localStorage.getItem('feedback-form-state')).message;
+  textarea.value = JSON.parse(
+    localStorage.getItem('feedback-form-state')
+  ).message;
 }
+
+form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
   event.preventDefault();
-  const {elements: { email, message }} = event.currentTarget;
+  const {
+    elements: { email, message },
+  } = event.currentTarget;
 
   if (email.value === '' || message.value === '') {
     return alert('Proszę uzupełnić wszystkie pola!');
@@ -30,6 +38,3 @@ function handleSubmit(event) {
     localStorage.removeItem('feedback-form-state');
   }
 }
-
-form.addEventListener('input', throttle(inputData, 500));
-form.addEventListener('submit', handleSubmit);
