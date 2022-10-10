@@ -12,7 +12,7 @@ function inputData() {
   localStorage.setItem('feedback-form-state', JSON.stringify(data));
 }
 
-if (localStorage.length > 0) {
+if (localStorage.length !== null) {
   input.value = JSON.parse(localStorage.getItem('feedback-form-state')).email;
   textarea.value = JSON.parse(localStorage.getItem('feedback-form-state')).message;
 }
