@@ -30,7 +30,7 @@ function handleSubmit(event) {
   } = event.currentTarget;
 
   if (email.value === '' || message.value === '') {
-    return alert('Proszę uzupełnić wszystkie pola!');
+    return alert('Please fill in all the fields!');
   } else {
     const result = { email: email.value, message: message.value };
     console.log(result);
